@@ -14,7 +14,7 @@ export default function RoutesComp() {
 
    return (
     <Routes>
-    <Route path="/" element={<LoginComp/>}></Route>
+    <Route path="/ReactShopProject" element={<LoginComp/>}></Route>
     <Route path="/Products" element={<ProductsComp/>}></Route>
     <Route path="/Customers" element={<CustomersComp/>}></Route>
     <Route path="/Purchases" element={<PurchasesComp/>}>
