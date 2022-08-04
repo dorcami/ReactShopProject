@@ -1,8 +1,8 @@
 import { useState } from "react"
 
+// A comp with signin/signup pages
 export default function LoginComp() {
   let [authMode, setAuthMode] = useState("signin")
-
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }

@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import firebase from "./firebaseApp"
+
+// Bootstrap imports
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
-import firebase from "./firebaseApp"
-import { useEffect, useState } from "react";
 
 
+// A Component with a form that enables customer editing
 
 export default function EditCustomerComp() {
 
@@ -18,7 +21,8 @@ export default function EditCustomerComp() {
   const dispatch = useDispatch();
   const [BProds,setBProds] = useState({});
 
-
+  // Recieves the customer data by using params, and stores it in the state.
+  // Finally, sets a dict with all the unique products that the customer has bought.
   const setData = () =>{
     let i = storeData.Customers.findIndex(item => item.id === params.customerid)
     let cstmr = storeData.Customers[i]
@@ -32,6 +36,7 @@ export default function EditCustomerComp() {
     setBProds(dict)
   }
 
+  // Sends the updated customer data to the server and to the redux store as well.
   const setUpdate = () =>{
     storeData.changeOnline? firebase.firestore().collection('Customers').doc(params.customerid).update(customer): console.log('simulated customer update');
     let NewCustomers = storeData.Customers
@@ -40,6 +45,7 @@ export default function EditCustomerComp() {
     dispatch({type: "EditCustomer", payload: NewCustomers})
   }
   
+  // Deletes a customer...
   const Delete = () =>{
     // Delete initially all the purchases of the customer we are about to delete
     storeData.Purchases.forEach(purchase =>{

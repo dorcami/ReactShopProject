@@ -1,8 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import firebase from "./firebaseApp"
+// Bootstrap imports
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useDispatch, useSelector } from 'react-redux';
-import firebase from "./firebaseApp"
 
 
 
@@ -11,6 +12,8 @@ export default function BuyProduct(props) {
   const dispatch = useDispatch();
   const [prodToBuy,setProd] = useState("");
   
+  // a function that sends a purchase to the server and to redux store as well.
+  // In addition, it updates the purchases total sum
   const addPurchase = () =>{
     let timenow = firebase.firestore.Timestamp.fromDate(new Date())
     let obj = {Date: timenow, CustomerID: props.user, ProductID: prodToBuy}

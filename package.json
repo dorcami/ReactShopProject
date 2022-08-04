@@ -1,7 +1,7 @@
 {
   "name": "finalreactproject",
   "version": "0.1.0",
-  "homepage": "https://dorcami.github.io/ReactShopProject",
+  "homepage": "https://dorcami.github.io/ReactShopProject/",
   "private": true,
   "dependencies": {
     "@mui/x-date-pickers": "^5.0.0-beta.3",

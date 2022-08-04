@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import firebase from "./firebaseApp"
+
+// Bootstrap imports
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
-import firebase from "./firebaseApp"
 
-
+// The component that enables product editing
 export default function EditProductComp() {
   const storeData = useSelector(store=>store);
   const params = useParams();
+  const [Busers,setBUsers] = useState({});
   const Navigate = useNavigate();
   const dispatch = useDispatch();
-  const [Busers,setBUsers] = useState({});
-
-
   const [product, setProduct] = useState({id: params.productid, Name:"", Price:0, Quantity:0})
 
+  // Recieves the product data by using params, and sets it in the state.
+  // Finally, sets a dict with all the customers the have bought the product.
   const setData = () =>{
     let i = storeData.Products.findIndex(product => product.id === params.productid)
     let prod = storeData.Products[i]
@@ -31,6 +33,7 @@ export default function EditProductComp() {
     setBUsers(dict)
   }
 
+  // Sends the updated product data to the server and to the redux store as well.
   const setUpdate = () =>{
     storeData.changeOnline? firebase.firestore().collection('Products').doc(params.productid).update(product): console.log('simulated product update');
     let NewProducts = storeData.Products
@@ -39,6 +42,7 @@ export default function EditProductComp() {
     dispatch({type: "EditProduct", payload: NewProducts})
   }
   
+  // Delete a product...
   const Delete = () =>{
     // Delete initially all the purchases of the product we are about to delete
     storeData.Purchases.forEach(purchase =>{

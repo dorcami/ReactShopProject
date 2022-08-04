@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import CustomDatePicker from "./Custom-Datepicker";
+// Bootstrap imports
+import "bootstrap/dist/css/bootstrap.min.css";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
-import "bootstrap/dist/css/bootstrap.min.css";
-import CustomDatePicker from "./Custom-Datepicker";
-import { Outlet, useNavigate } from 'react-router-dom';
 
-
+// A component for showing all or filtered purchases. The user defines the criteria
 export default function PurchasesComp() {
   
   const storeData = useSelector(store=>store);
@@ -16,6 +17,8 @@ export default function PurchasesComp() {
   const [date, setDate] = useState("");
   const Navigate = useNavigate();
 
+  // Navigates to a route composed from the search parameters.
+  // The purchases table will use those parameters to filter itself.
   const searchPurchase = (prod, cust, dat) => {
     let date=dat
     if(date===""){date="-"}

@@ -1,21 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import firebase from "./firebaseApp"
+
+// Bootstrap imports
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from "react-bootstrap/Card";
 import Accordion from 'react-bootstrap/Accordion';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover'
-import { useDispatch, useSelector } from "react-redux";
-import firebase from "./firebaseApp"
-import { useEffect, useState } from "react";
 
-
+// A comp for each rendered product in the products page
 export default function ProductComp(props) {
   const [buying_customers, setCustomers] = useState({});
   const storeData = useSelector((store) => store);
   const dispatch = useDispatch();
   const [prodToBuy,setProd] = useState("");
 
+  // Creates a list of purchase dates for each customer that has purchased the product
   useEffect(() => {
     let dict = {}
     storeData.Purchases.forEach(purchase =>{
@@ -34,6 +37,8 @@ export default function ProductComp(props) {
     // eslint-disable-next-line
   },[storeData.Purchases])
 
+  // Adds a new purchase (for the selected customer) to the server and to the redux store.
+  // calculates the new purchases total sum
   const addPurchase = (id) =>{
     let timenow = firebase.firestore.Timestamp.fromDate(new Date())
     let obj = {Date: timenow, CustomerID: id, ProductID: prodToBuy}
@@ -42,10 +47,9 @@ export default function ProductComp(props) {
     let i = storeData.Products.findIndex(product => product.id === prodToBuy)
     let price = Number(storeData.Products[i].Price);
     dispatch({type: "SetTotals", payload: storeData.TotalPurchases+price})
-
-
   }
 
+  // Defines the element the gets opened in order to add a product for a user
   const popover = (name,id) => {
     return (
     <Popover id="popover-contained">

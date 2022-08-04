@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import ProductComp from "./Product";
+// Bootstrap imports
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 
+// A component for showing all the products 
 export default function ProductsComp() {
 
   const storeData = useSelector(store => store);

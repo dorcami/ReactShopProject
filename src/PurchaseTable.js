@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Table from "react-bootstrap/Table";
 import { useParams } from "react-router-dom";
+// Bootstrap imports
+import Table from "react-bootstrap/Table";
 
-
+// A comp that shows the purchases in a table.
+// The criteria used to filter the table are taken from the route(params).
 export default function PurchasesTableComp() {
   const storeData = useSelector((store) => store);
   const { cust, prod, date } = useParams();
   const [filteredPurchases, setPurchases] = useState([]);
+  
   useEffect(() => {
     let purchases = storeData.Purchases;
     if (cust !== "-") {

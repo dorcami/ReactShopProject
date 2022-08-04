@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import Table from 'react-bootstrap/Table';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import BuyProduct from './BuyProduct';
+
+// Bootstrap imports
+import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
-import BuyProduct from './BuyProduct';
 
 
 export default function CustomersComp() {

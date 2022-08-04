@@ -1,11 +1,9 @@
 import './App.css';
-import MenuComp from './Menu';
 import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import firebase from "./firebaseApp"
+import MenuComp from './Menu';
 import RoutesComp from './Routes';
-
-
 
 
 function App() {
